@@ -37,17 +37,8 @@ bool is_in_love(int x, int y) {
 	float check_x = ((static_cast<float>(x) / static_cast<float>(HEART_SIZE)) - 0.5f) * width;
 	float check_y = ((static_cast<float>(HEART_SIZE - y) / static_cast<float>(HEART_SIZE)) - 0.4f) * height;
 
-	float top_y = 0.0f;
-	float bottom_y = 0.0f;
-
-	if (check_x >= 0) {
-		top_y = sqrt(1 - (check_x * check_x)) + (HEART_COEFFICIENT * sqrt(check_x));
-		bottom_y = -sqrt(1 - (check_x * check_x)) + (HEART_COEFFICIENT* sqrt(check_x));
-	}
-	else {
-		top_y = sqrt(1 - (check_x * check_x)) + (HEART_COEFFICIENT * sqrt(-check_x));
-		bottom_y = -sqrt(1 - (check_x * check_x)) + (HEART_COEFFICIENT * sqrt(-check_x));
-	}
+    float top_y = sqrt(1 - pow(check_x, 2)) + (HEART_COEFFICIENT * sqrt(abs(check_x)));
+    float bottom_y = -sqrt(1 - pow(check_x, 2)) + (HEART_COEFFICIENT* sqrt(abs(check_x)));
 
 	if ((bottom_y <= check_y) && (check_y <= top_y)) {
 		return true;
